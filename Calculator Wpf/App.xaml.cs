@@ -9,6 +9,8 @@ namespace Calculator_Wpf
     /// </summary>
     public partial class App : Application
     {
+    
+    
     }
 
 }
