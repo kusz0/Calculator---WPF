@@ -7,13 +7,13 @@ using System.Windows.Media;
 
 namespace Calculator_Wpf
 {
-    class CalculatorEnginee : ButtonHandler
+    class CalculatorEnginee 
     {
         public void ClearAll()
         {
 
         }
-        public void InputDigit(char digit)
+        public void InputDigit(float digit)
         {
 
         }

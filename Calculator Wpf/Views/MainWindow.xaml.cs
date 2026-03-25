@@ -19,6 +19,8 @@ namespace Calculator_Wpf
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new ViewModels.CalculatorViewModel();
         }
     }
 }

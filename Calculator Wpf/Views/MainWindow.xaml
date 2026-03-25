@@ -82,7 +82,7 @@
         <!-- Screenm -->
         <TextBlock x:Name="DisplayScreen"
                    Grid.Row="0" Grid.ColumnSpan="4"
-                   Text="0"
+                   Text="{Binding Result}"
                    Foreground="White"
                    FontSize="72"
                    FontWeight="Light"
