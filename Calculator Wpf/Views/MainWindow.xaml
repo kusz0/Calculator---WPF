@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="iOS Calculator by Kusz0"
-        Height="590" Width="395"
+        Height="590" Width="Auto"
         SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Background="#FF0B0B0B">
@@ -83,14 +83,19 @@
         <Button Grid.Row="5" Grid.Column="2" Content="." Style="{StaticResource RoundButton}"/>
         <Button Grid.Row="5" Grid.Column="3" Content="=" Style="{StaticResource OperatorButton}"/>
 
-        <Button x:Name="expandBtn" Click="expandBtn_Click" Content="+" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Style="{StaticResource ExpandBtn}"/>
 
         <!--= niewidoczna sekcja -->
-        <Grid x:Name="AdvancedModeSection" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="5" Visibility="Collapsed">
+        <Grid x:Name="AdvancedModeSection" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="5" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
 
             <Button Grid.Row="0" Grid.Column="0" Content="(" Style="{StaticResource RoundButton}"/>
@@ -103,9 +108,27 @@
             <Button Grid.Row="2" Grid.Column="1" Content="n^√x" Style="{StaticResource RoundButton}"/>
 
             <Button Grid.Row="3" Grid.ColumnSpan="2" Content="x!" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="3" Grid.ColumnSpan="2"
+            Content="x!"
+            HorizontalAlignment="Left"
+            Style="{StaticResource RoundButton}"
+            Width="168" Height="80">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                             CornerRadius="40"
+                             Width="{TemplateBinding Width}"
+                             Height="{TemplateBinding Height}"/>
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
 
         
+        <Button x:Name="expandBtn" Click="ExpandBtn_Click" Content="+" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Width="30" Style="{StaticResource ExpandBtn}"/>
 
     </Grid>
 </Window>

@@ -47,7 +47,8 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="Arial Black"/>
             <Setter Property="Background" Value="#fff"/>
-            <Setter Property="Cursor" Value="ScrollE"/>
+            <Setter Property="Cursor" Value="ScrollWE"/>
+            <Setter Property="Margin" Value="10 0 10 0"/>
         </Style>
     </Application.Resources>
 </Application>

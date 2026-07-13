@@ -44,8 +44,21 @@ namespace Calculator_Wpf
                 vm.Result += value;
         }
 
-        private void expandBtn_Click(object sender, RoutedEventArgs e)
+        private void ExpandBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (AdvancedModeSection.Visibility == Visibility.Collapsed)
+            {
+                AdvancedModeSection.Visibility = Visibility.Visible;
+                expandBtn.Content = "-";
+                expandBtn.Width = 100;
+                
+            }
+            else
+            {
+                AdvancedModeSection.Visibility = Visibility.Collapsed;
+                expandBtn.Content = "+";
+                expandBtn.Width = 30;
+            }
         }
     }
 }
