@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Calculator_Wpf.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +22,30 @@ namespace Calculator_Wpf
             InitializeComponent();
 
             DataContext = new ViewModels.CalculatorViewModel();
+        }
+        private void OnEqualClick(object sender, RoutedEventArgs e)
+        {
+            var vm = (CalculatorViewModel)DataContext;
+
+            string finalResult = CalculatorEnginee.Evaluate(vm.Result);
+
+            vm.Result = finalResult;
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            var vm = (CalculatorViewModel)DataContext;
+            var button = (Button)sender;
+            string value = button.Content.ToString();
+
+            if (vm.Result == "0" || vm.Result == "Error")
+                vm.Result = value;
+            else
+                vm.Result += value;
+        }
+
+        private void expandBtn_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

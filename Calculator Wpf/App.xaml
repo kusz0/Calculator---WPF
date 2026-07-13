@@ -4,6 +4,50 @@
              xmlns:local="clr-namespace:Calculator_Wpf"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="RoundButton" TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse x:Name="ellipse"
+                                     Fill="{TemplateBinding Background}"
+                                     Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}"/>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ellipse" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="OperatorButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
+            <Setter Property="Background" Value="#FFFE9500"/>
+        </Style>
+
+        <Style x:Key="FunctionButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
+            <Setter Property="Background" Value="#A5A5A5"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="ExpandBtn" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Cursor" Value="ScrollE"/>
+        </Style>
     </Application.Resources>
 </Application>

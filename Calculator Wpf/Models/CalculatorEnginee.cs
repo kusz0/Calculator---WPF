@@ -1,35 +1,37 @@
 ﻿using System;
-using System.Data; 
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
 
-namespace Calculator_Wpf.Models
+namespace Calculator_Wpf
 {
-    public static class CalculatorEngine
+    class CalculatorEnginee 
     {
-        public static string Evaluate(string expression)
-        {
-            try
+            public static string Evaluate(string expression)
             {
-               
-                string formattedExpression = expression
-                    .Replace("×", "*")
-                    .Replace("÷", "/");
+                try
+                {
+                    string formattedExpression = expression
+                        .Replace("×", "*")
+                        .Replace("÷", "/");
 
-                
-                formattedExpression = formattedExpression.Replace("(", "*(");
-                
-                formattedExpression = formattedExpression.Replace("**", "*");
 
-                
-                var table = new DataTable();
-                var result = table.Compute(formattedExpression, "");
+                    var table = new DataTable();
+                    var result = table.Compute(formattedExpression, "");
 
-              
-                return Convert.ToDouble(result).ToString();
-            }
-            catch (Exception)
-            {
-                return "Error";
+                    return Convert.ToDouble(result).ToString();
+                }
+                catch (Exception)
+                {
+                    return "Error";
+                }
             }
         }
     }
-}
+
+
+
+
