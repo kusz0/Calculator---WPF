@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="iOS Calculator by Kusz0"
-        Height="590" Width="Auto"
-        SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+        Height="590" Width="auto"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="#FF0B0B0B">
 
 
     <Grid>
-    <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
-        
+
             <ColumnDefinition Width="20px"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -31,16 +31,18 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="DisplayScreen"
-                   Grid.Row="0" Grid.ColumnSpan="4"
-                   Text="{Binding Result}"
-                   Foreground="White"
-                   FontSize="72"
-                   FontWeight="Light"
-                   TextAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Margin="0,0,10,10"
-                   />
+        <ScrollViewer Grid.ColumnSpan="6" 
+            Grid.Row="0"
+            HorizontalScrollBarVisibility="Auto" 
+         VerticalScrollBarVisibility="Disabled"
+         HorizontalAlignment="Right" 
+         VerticalAlignment="Bottom" x:Name="ResultScroll"
+                      MaxWidth="390">
+
+            <Label x:Name="ResultLabel" 
+                   Style="{StaticResource ResultLabel}"
+                   Content="0"/>
+        </ScrollViewer>
 
         <Button Grid.Row="1" Grid.Column="0" Content="AC" Style="{StaticResource FunctionButton}" FontWeight="Normal"/>
         <Button Grid.Row="1" Grid.Column="1" Content="+/−" Style="{StaticResource FunctionButton}"/>
@@ -127,7 +129,7 @@
             </Button>
         </Grid>
 
-        
+
         <Button x:Name="expandBtn" Click="ExpandBtn_Click" Content="+" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Width="30" Style="{StaticResource ExpandBtn}"/>
 
     </Grid>

@@ -20,29 +20,9 @@ namespace Calculator_Wpf
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new ViewModels.CalculatorViewModel();
-        }
-        private void OnEqualClick(object sender, RoutedEventArgs e)
-        {
-            var vm = (CalculatorViewModel)DataContext;
-
-            string finalResult = CalculatorEnginee.Evaluate(vm.Result);
-
-            vm.Result = finalResult;
+            ResultScroll.ScrollToRightEnd();
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs e)
-        {
-            var vm = (CalculatorViewModel)DataContext;
-            var button = (Button)sender;
-            string value = button.Content.ToString();
-
-            if (vm.Result == "0" || vm.Result == "Error")
-                vm.Result = value;
-            else
-                vm.Result += value;
-        }
 
         private void ExpandBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -51,6 +31,7 @@ namespace Calculator_Wpf
                 AdvancedModeSection.Visibility = Visibility.Visible;
                 expandBtn.Content = "-";
                 expandBtn.Width = 100;
+                ResultScroll.MaxWidth = 540;
                 
             }
             else
@@ -58,6 +39,7 @@ namespace Calculator_Wpf
                 AdvancedModeSection.Visibility = Visibility.Collapsed;
                 expandBtn.Content = "+";
                 expandBtn.Width = 30;
+                ResultScroll.MaxWidth = 390;
             }
         }
     }
