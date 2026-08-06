@@ -10,7 +10,9 @@
         WindowStartupLocation="CenterScreen"
         Background="#FF0B0B0B">
 
-
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -41,31 +43,32 @@
 
             <Label x:Name="ResultLabel" 
                    Style="{StaticResource ResultLabel}"
-                   Content="0"/>
+                   Content="{Binding DisplayText}"/>
         </ScrollViewer>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="AC" Style="{StaticResource FunctionButton}" FontWeight="Normal"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="+/−" Style="{StaticResource FunctionButton}"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="%" Style="{StaticResource FunctionButton}"/>
-        <Button Grid.Row="1" Grid.Column="3" Content="÷" Style="{StaticResource OperatorButton}"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="AC"  Command="{Binding ClearCommand}" Style="{StaticResource FunctionButton}" FontWeight="Normal"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="+/−" Command="{Binding SignCommand}" Style="{StaticResource FunctionButton}"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="%" Command="{Binding PercentCommand}" Style="{StaticResource FunctionButton}"/>
+        <Button Grid.Row="1" Grid.Column="3" Content="÷" Command="{Binding InputCommand}" CommandParameter="÷" Style="{StaticResource OperatorButton}"/>
 
-        <Button Grid.Row="2" Grid.Column="0" Content="7" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="8" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="×" Style="{StaticResource OperatorButton}"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="7" Command="{Binding InputCommand}" CommandParameter="7" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="8"  Command="{Binding InputCommand}" CommandParameter="8" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="9" Command="{Binding InputCommand}" CommandParameter="9" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="×" Command="{Binding InputCommand}" CommandParameter="×" Style="{StaticResource OperatorButton}"/>
 
-        <Button Grid.Row="3" Grid.Column="0" Content="4" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="5" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="3" Grid.Column="2" Content="6" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="3" Grid.Column="3" Content="−" Style="{StaticResource OperatorButton}"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="4" Command="{Binding InputCommand}" CommandParameter="4" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="5" Command="{Binding InputCommand}" CommandParameter="5" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="6" Command="{Binding InputCommand}" CommandParameter="6" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="3" Grid.Column="3" Content="−" Command="{Binding InputCommand}" CommandParameter="−" Style="{StaticResource OperatorButton}"/>
 
-        <Button Grid.Row="4" Grid.Column="0" Content="1" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="4" Grid.Column="1" Content="2" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="4" Grid.Column="2" Content="3" Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="4" Grid.Column="3" Content="+" Style="{StaticResource OperatorButton}"/>
+        <Button Grid.Row="4" Grid.Column="0" Content="1" Command="{Binding InputCommand}" CommandParameter="1" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="2" Command="{Binding InputCommand}" CommandParameter="2" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="3" Command="{Binding InputCommand}" CommandParameter="3" Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="4" Grid.Column="3" Content="+" Command="{Binding InputCommand}" CommandParameter="+" Style="{StaticResource OperatorButton}"/>
 
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="0"
+                Command="{Binding InputCommand}" CommandParameter="0"
                 HorizontalAlignment="Left"
                 Style="{StaticResource RoundButton}"
                 Width="168" Height="80">
@@ -82,11 +85,11 @@
             </Button.Template>
         </Button>
 
-        <Button Grid.Row="5" Grid.Column="2" Content="." Style="{StaticResource RoundButton}"/>
-        <Button Grid.Row="5" Grid.Column="3" Content="=" Style="{StaticResource OperatorButton}"/>
+        <Button Grid.Row="5" Grid.Column="2" Content="." Command="{Binding InputCommand}" CommandParameter="." Style="{StaticResource RoundButton}"/>
+        <Button Grid.Row="5" Grid.Column="3" Content="=" Command="{Binding CalculateCommand}" Style="{StaticResource OperatorButton}"/>
 
 
-        <!--= niewidoczna sekcja -->
+        <!--= unvisuble section-->
         <Grid x:Name="AdvancedModeSection" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="5" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -100,18 +103,19 @@
             </Grid.RowDefinitions>
 
 
-            <Button Grid.Row="0" Grid.Column="0" Content="(" Style="{StaticResource RoundButton}"/>
-            <Button Grid.Row="0" Grid.Column="1" Content=")" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="(" Command="{Binding InputCommand}" CommandParameter="(" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="0" Grid.Column="1" Content=")" Command="{Binding InputCommand}" CommandParameter=")" Style="{StaticResource RoundButton}"/>
 
-            <Button Grid.Row="1" Grid.Column="0" Content="x^2" Style="{StaticResource RoundButton}"/>
-            <Button Grid.Row="1" Grid.Column="1" Content="x^n" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="1" Grid.Column="0" Content="x^2" Command="{Binding InputCommand}" CommandParameter="^2" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="x^n" Command="{Binding InputCommand}" CommandParameter="^" Style="{StaticResource RoundButton}"/>
 
-            <Button Grid.Row="2" Grid.Column="0" Content="√x" Style="{StaticResource RoundButton}"/>
-            <Button Grid.Row="2" Grid.Column="1" Content="n^√x" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="2" Grid.Column="0" Content="√x" Command="{Binding InputCommand}" CommandParameter="sqrt(" Style="{StaticResource RoundButton}"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="n^√x" Command="{Binding InputCommand}" CommandParameter="^(1/" Style="{StaticResource RoundButton}"/>
 
             <Button Grid.Row="3" Grid.ColumnSpan="2" Content="x!" Style="{StaticResource RoundButton}"/>
             <Button Grid.Row="3" Grid.ColumnSpan="2"
             Content="x!"
+            Command="{Binding InputCommand}" CommandParameter="!"
             HorizontalAlignment="Left"
             Style="{StaticResource RoundButton}"
             Width="168" Height="80">

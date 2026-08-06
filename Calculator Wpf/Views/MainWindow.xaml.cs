@@ -20,6 +20,13 @@ namespace Calculator_Wpf
         public MainWindow()
         {
             InitializeComponent();
+            var viewModel = new CalculatorViewModel();
+            DataContext = viewModel;
+            viewModel.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(CalculatorViewModel.DisplayText))
+                    ResultScroll.ScrollToRightEnd();
+            };
             ResultScroll.ScrollToRightEnd();
         }
 
